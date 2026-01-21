@@ -1,11 +1,13 @@
 package org.example.crm.service;
 
+import org.example.crm.Dto.userReqDto;
 import org.example.crm.model.User;
 import org.example.crm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +24,10 @@ private PasswordEncoder encoder;
         return userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("user not found"));
     }
 
-    public User adduser(User user){
-    user.setPassword(encoder.encode(user.getPassword()));
-    return userRepository.save(user);
+    public User adduser(userReqDto user){
+        User user1 = new User();
+        user1.setUsername(user.getUsername());
+    user1.setPassword(encoder.encode(user.getPassword()));
+    return userRepository.save(user1);
     }
 }

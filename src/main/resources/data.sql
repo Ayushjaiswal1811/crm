@@ -1,0 +1,1 @@
+INSERT INTO user values ('admin','admin123');

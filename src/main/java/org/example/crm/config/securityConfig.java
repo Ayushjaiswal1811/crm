@@ -3,6 +3,7 @@ package org.example.crm.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.PasswordManagementDsl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +16,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
 public class securityConfig {
 //    @Bean
 //    public UserDetailsService userDetailsService(){
@@ -23,7 +26,10 @@ public class securityConfig {
 //    }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http){
-        http.csrf( csrf->csrf.disable()).authorizeHttpRequests(auth ->auth.requestMatchers("/public/**").permitAll().requestMatchers("/admin/**").authenticated().anyRequest().authenticated()).httpBasic(Customizer.withDefaults());
+        http.csrf( csrf->csrf.disable())
+                .authorizeHttpRequests(auth ->auth.requestMatchers("/public/**","/","/public")
+                        .permitAll().requestMatchers("/admin/**").authenticated().anyRequest().authenticated())
+                .formLogin(Customizer.withDefaults()).logout(Customizer.withDefaults()).httpBasic(Customizer.withDefaults());
         return http.build();
     }
 
