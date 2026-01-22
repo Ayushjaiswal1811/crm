@@ -1,5 +1,6 @@
 package org.example.crm.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,6 +32,7 @@ public class Department {
     private Date createdAt;
 
     @OneToMany
+    @JsonIgnore
     @JoinColumn()
     private List<Employee> employees = new ArrayList<>();
 }

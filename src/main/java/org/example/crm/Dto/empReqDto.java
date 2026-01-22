@@ -3,8 +3,6 @@ package org.example.crm.Dto;
 import lombok.Data;
 import org.example.crm.Enum.empStatus;
 
-import java.time.LocalDate;
-
 @Data
 public class empReqDto {
     private  String name;

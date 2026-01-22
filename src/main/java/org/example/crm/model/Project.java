@@ -21,9 +21,9 @@ import java.util.Set;
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ProjId;
+    private Long projId;
 
-    private  String Projname;
+    private  String projName;
 
     private String description;
 
@@ -35,7 +35,8 @@ public class Project {
     private projStatus status;
 
 @ManyToOne
-    @JoinColumn(name = "manager_id")
+@JsonIgnore
+@JoinColumn(name = "manager_id")
     private Employee manager;
 
 @ManyToMany(mappedBy = "project")

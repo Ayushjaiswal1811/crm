@@ -41,8 +41,8 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     private empStatus empStatus;
 
-    @JsonIgnore
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "managerId")
     private Employee manager;
 
@@ -50,8 +50,9 @@ public class Employee {
     @JsonIgnore
     private List<Employee> teamMembers;
 
-    @JsonIgnore
+
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name="userId")
     private User user;
 

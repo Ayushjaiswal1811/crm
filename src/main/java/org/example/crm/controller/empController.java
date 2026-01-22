@@ -46,7 +46,7 @@ public class empController {
         return employee;
     }
 
-    @GetMapping("/admin/employees")
+    @GetMapping("admin")
     public ResponseEntity<List<Employee>> getEmployees(){
         try{
             return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
